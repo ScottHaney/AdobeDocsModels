@@ -10,11 +10,15 @@ Welcome to testdocs's documentation!
    :maxdepth: 2
    :caption: Contents:
 
-
-
 Indices and tables
 ==================
 
 * :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`
+
+Some intro text here...
+
+.. helloworld::
+
+Some more text here...
