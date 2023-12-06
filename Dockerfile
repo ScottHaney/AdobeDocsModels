@@ -11,7 +11,7 @@ FROM sphinxdoc/sphinx
 #COPY requirements.txt .
 #RUN python -m pip install -r requirements.txt
 
-#WORKDIR /docs
+WORKDIR /docs
 COPY . /docs
 
 # Creates a non-root user with an explicit UID and adds permission to access the /app folder
