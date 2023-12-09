@@ -1,4 +1,10 @@
-﻿using Microsoft.Extensions.Hosting;
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Hosting;
 
-await Host.CreateDefaultBuilder(args)
-    .RunConsoleAsync();
+var configuration = new ConfigurationBuilder()
+    .AddJsonFile("config.json", true)
+    .Build();
+
+var builder = Host.CreateDefaultBuilder(args);
+
+await builder.RunConsoleAsync();
