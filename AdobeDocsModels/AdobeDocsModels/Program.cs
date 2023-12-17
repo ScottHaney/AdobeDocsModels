@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using AdobeDocsModels;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using System.Xml.Linq;
 using System.Xml.XPath;
@@ -10,10 +11,9 @@ var configuration = new ConfigurationBuilder()
 var applicationXmlPath = Path.Combine("XmlDocs", "general", "application.xml");
 
 var root = XElement.Load(applicationXmlPath);
+var parser = new ObjectParser();
 
-var objectSection = root.XPathSelectElement("./section").Value;
-var attributesSection = root.XPathSelectElement("./section/section[@ids='attributes']");
-var methodsSection = root.XPathSelectElement("./section/section[@ids='methods']");
+var result = parser.Parse(root).ToList();
 
 var builder = Host.CreateDefaultBuilder(args);
 
