@@ -11,9 +11,9 @@ var configuration = new ConfigurationBuilder()
 var applicationXmlPath = Path.Combine("XmlDocs", "general", "application.xml");
 
 var root = XElement.Load(applicationXmlPath);
-var parser = new ObjectParser();
+var parser = new SectionsParser();
 
-var result = parser.Parse(root).ToList();
+var result = parser.ReadAllSections(root);
 
 var builder = Host.CreateDefaultBuilder(args);
 

@@ -9,50 +9,50 @@ using System.Xml.XPath;
 
 namespace AdobeDocsModels;
 
-public class ObjectParser
+public class SectionsParser
 {
-    public IEnumerable<(LineItem Header, List<LineItem> Items)> Parse(XElement root)
+    public Section ReadAllSections(XElement root)
     {
         var rootSection = root.XPathSelectElement("./section");
-        var sections = ReadSections(rootSection);
-
-        return GroupItems(ProcessItems(sections.Items));
+        return ReadSection(rootSection);
     }
 
-    private IEnumerable<(LineItem Header, List<LineItem> Items)> GroupItems(IEnumerable<LineItem> items)
+    private Section ReadSection(XElement section)
     {
-        LineItem header = null;
-        List<LineItem> subItems = [];
-        foreach (var item in items)
-        {
-            if (IsHeader(item))
-            {
-                if (header != null || subItems.Any())
-                    yield return new(header, subItems);
+        var children = section.Elements().ToList();
 
-                header = item;
-                subItems = [];
-            }
+        List<DetailGroup> groups = [];
+        List<XElement> sections = [];
+
+        XElement header = null;
+        List<XElement> details = [];
+        foreach (var child in children)
+        {
+            if (child.Name == "section")
+                sections.Add(child);
             else
-                subItems.Add(item);
+            {
+                if (IsHeader(child))
+                {
+                    if (header != null)
+                    {
+                        groups.Add(new(GetFullText(header), details.Select(x => GetFullText(x)).ToArray()));
+                        details = [];
+                    }
+
+                    header = child;
+                }
+                else
+                    details.Add(child);
+            }
         }
+
+        return new(section.Attribute("names").Value, groups, sections.Select(x => ReadSection(x)).ToList());
     }
 
-    private bool IsHeader(LineItem item)
+    private bool IsHeader(XElement element)
     {
-        return item.InteriorTagName == "strong";
-    }
-
-    private IEnumerable<LineItem> ProcessItems(IEnumerable<XElement> items)
-    {
-        foreach (var item in items)
-        {
-            var tagName = item.Name.LocalName;
-            var innerName = item.Elements().FirstOrDefault()?.Name.LocalName;
-            var content = GetFullText(item);
-
-            yield return new(tagName, innerName, content);
-        }
+        return element.Name == "title" || element.Elements().FirstOrDefault()?.Name.LocalName == "strong";
     }
 
     private string GetFullText(XElement element)
@@ -62,25 +62,8 @@ public class ObjectParser
         var regex = new Regex("<.*?>");
         return regex.Replace(innerText, x => string.Empty);
     }
-
-    private SectionItem ReadSections(XElement section)
-    {
-        var children = section.Elements().ToList();
-
-        List<XElement> items = [];
-        List<XElement> sections = [];
-        foreach (var child in children)
-        {
-            if (child.Name == "section")
-                sections.Add(child);
-            else
-                items.Add(child);
-        }
-
-        return new(items, sections.Select(x => ReadSections(x)).ToList());
-    }
 }
 
-public record SectionItem(ICollection<XElement> Items, ICollection<SectionItem> Sections);
+public record Section(string Name, ICollection<DetailGroup> DetailGroups, ICollection<Section> SubSections);
 
-public record LineItem(string TagName, string InteriorTagName, string Content);
+public record DetailGroup(string Title, ICollection<string> Details);
