@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34322.80
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdobeDocsModels", "AdobeDocsModels\AdobeDocsModels.csproj", "{858A4F6E-F8B3-47A4-BD9F-6A7C13630598}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdobeDocsModels", "AdobeDocsModels\AdobeDocsModels.csproj", "{858A4F6E-F8B3-47A4-BD9F-6A7C13630598}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdobeCode.Generator", "AdobeCode.Generator\AdobeCode.Generator.csproj", "{493F7A46-4A5F-47BD-B4A5-0DFAFDB9A83B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdobeClasses", "AdobeClasses\AdobeClasses.csproj", "{B6A21A45-FB96-467F-B8FC-C7E2D6CC18C8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{858A4F6E-F8B3-47A4-BD9F-6A7C13630598}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{858A4F6E-F8B3-47A4-BD9F-6A7C13630598}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{858A4F6E-F8B3-47A4-BD9F-6A7C13630598}.Release|Any CPU.Build.0 = Release|Any CPU
+		{493F7A46-4A5F-47BD-B4A5-0DFAFDB9A83B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{493F7A46-4A5F-47BD-B4A5-0DFAFDB9A83B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{493F7A46-4A5F-47BD-B4A5-0DFAFDB9A83B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{493F7A46-4A5F-47BD-B4A5-0DFAFDB9A83B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B6A21A45-FB96-467F-B8FC-C7E2D6CC18C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B6A21A45-FB96-467F-B8FC-C7E2D6CC18C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B6A21A45-FB96-467F-B8FC-C7E2D6CC18C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B6A21A45-FB96-467F-B8FC-C7E2D6CC18C8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
