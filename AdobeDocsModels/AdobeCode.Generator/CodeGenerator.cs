@@ -1,5 +1,9 @@
-﻿using Microsoft.CodeAnalysis;
+﻿using AdobeDocsModels;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using System;
+using System.IO;
+using System.Xml.Linq;
 
 namespace AdobeCode.Generator
 {
@@ -8,7 +12,17 @@ namespace AdobeCode.Generator
     {
         public void Initialize(IncrementalGeneratorInitializationContext context)
         {
+            /*var applicationXmlPath = Path.Combine("XmlDocs", "general", "application.xml");
 
+            var root = XElement.Load(applicationXmlPath);
+            var parser = new SectionsParser();
+
+            var result = parser.ReadAllSections(root);*/
+
+            context.RegisterPostInitializationOutput(ctx =>
+            {
+                ctx.AddSource("Test.g.cs", "// Custom Generated");
+            });
         }
     }
 }
