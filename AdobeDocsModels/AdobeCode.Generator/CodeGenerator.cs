@@ -21,7 +21,13 @@ namespace AdobeCode.Generator
 
             context.RegisterPostInitializationOutput(ctx =>
             {
-                ctx.AddSource("Test.g.cs", "// Custom Generated");
+                ctx.AddSource("Test.g.cs", $@"namespace Testing
+{{
+    public class GeneratedClassTest
+    {{
+    }}
+}}
+");
             });
         }
     }
