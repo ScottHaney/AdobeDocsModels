@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "CodeGenerator": {
+      "commandName": "DebugRoslynComponent",
+      "targetProject": "..\\AdobeClasses\\AdobeClasses.csproj"
+    }
+  }
+}

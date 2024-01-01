@@ -12,12 +12,12 @@ namespace AdobeCode.Generator
     {
         public void Initialize(IncrementalGeneratorInitializationContext context)
         {
-            /*var applicationXmlPath = Path.Combine("XmlDocs", "general", "application.xml");
+            var applicationXmlPath = Path.Combine("..", "AdobeDocsModels", "XmlDocs", "general", "application.xml");
 
             var root = XElement.Load(applicationXmlPath);
             var parser = new SectionsParser();
 
-            var result = parser.ReadAllSections(root);*/
+            var result = parser.ReadAllSections(root);
 
             context.RegisterPostInitializationOutput(ctx =>
             {
